@@ -89,7 +89,11 @@
       _controller.modalPresentationStyle = UIModalPresentationFullScreen;
       break;
     case RNSScreenStackPresentationFormSheet:
+#if TARGET_OS_IOS
       _controller.modalPresentationStyle = UIModalPresentationFormSheet;
+#else
+      _controller.modalPresentationStyle = UIModalPresentationFullScreen;
+#endif
       break;
     case RNSScreenStackPresentationTransparentModal:
       _controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
