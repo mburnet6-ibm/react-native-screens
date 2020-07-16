@@ -132,7 +132,9 @@
       _controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
       break;
     case RNSScreenStackAnimationFlip:
+#if TARGET_OS_IOS
       _controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+#endif
       break;
     case RNSScreenStackAnimationNone:
     case RNSScreenStackAnimationDefault:

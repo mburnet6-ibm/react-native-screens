@@ -156,6 +156,7 @@
       [navbar setTitleTextAttributes:attrs];
     }
 
+#if TARGET_OS_IOS
     if (@available(iOS 11.0, *)) {
       if (config.largeTitle && (config.largeTitleFontFamily || config.largeTitleFontSize || config.largeTitleColor || config.titleColor)) {
         NSMutableDictionary *largeAttrs = [NSMutableDictionary new];
@@ -171,6 +172,7 @@
         [navbar setLargeTitleTextAttributes:largeAttrs];
       }
     }
+#endif
   }
 }
 
@@ -239,8 +241,10 @@
             // in order for new back button image to be loaded we need to trigger another change
             // in back button props that'd make UIKit redraw the button. Otherwise the changes are
             // not reflected. Here we change back button visibility which is then immediately restored
+#if TARGET_OS_IOS
             vc.navigationItem.hidesBackButton = YES;
-            [config updateViewControllerIfNeeded];
+#endif
+              [config updateViewControllerIfNeeded];
           }];
         }
         return [UIImage new];
@@ -357,6 +361,7 @@
   }
 
   navitem.title = config.title;
+#if TARGET_OS_IOS
   if (config.backTitle != nil || config.backTitleFontFamily || config.backTitleFontSize) {
     prevItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                   initWithTitle:config.backTitle ?: prevItem.title
@@ -435,7 +440,7 @@
       }
     }
   }
-
+#endif
   if (animated
       && vc.transitionCoordinator != nil
       && vc.transitionCoordinator.presentationStyle == UIModalPresentationNone
